@@ -28,7 +28,7 @@
         },
         "cache": {
             "host": "enketo_redis_cache",
-            "port": "6380"
+            "port": "6379"
         }
     },
     "support": {
