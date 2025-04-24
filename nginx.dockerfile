@@ -9,12 +9,6 @@ RUN apt-get update \
 COPY ./ ./
 # RUN files/prebuild/write-version.sh
 
-cat << 'EOF' > /tmp/version.txt
-versions:
-e4221ebeb41cd6ccb0cedad0461e5b603c207339 (v2024.3.2-1-ge4221eb)
-8b1de6512faa7a60c05764312caec01f5c138c42 client (master)
-7574030f7ea8750f3837950001a5efcdeba45b92 server (develop)
-EOF
 
 ARG SKIP_FRONTEND_BUILD
 # RUN files/prebuild/build-frontend.sh
@@ -42,6 +36,12 @@ COPY files/nginx/redirector.conf /usr/share/odk/nginx/
 COPY files/nginx/common-headers.conf /usr/share/odk/nginx/
 
 COPY --from=intermediate client/dist/ /usr/share/nginx/html
-COPY --from=intermediate /tmp/version.txt /usr/share/nginx/html
+# COPY --from=intermediate /tmp/version.txt /usr/share/nginx/html
+
+RUN printf 'versions:\n%s (%s)\n%s client (%s)\n%s server (%s)\n' \
+    "e4221ebeb41cd6ccb0cedad0461e5b603c207339" "v2024.3.2-1-ge4221eb" \
+    "8b1de6512faa7a60c05764312caec01f5c138c42" "master" \
+    "7574030f7ea8750f3837950001a5efcdeba45b92" "develop" \
+  > /tmp/version.txt
 
 ENTRYPOINT [ "/scripts/setup-odk.sh" ]
