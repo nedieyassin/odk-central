@@ -13,7 +13,7 @@ RUN files/prebuild/build-frontend.sh
 # Stage 2: Final Nginx image (configured for use behind an external proxy with templating)
 FROM nginx:alpine
 
-EXPOSE 80 # Traefik will forward to this internal port
+EXPOSE 80
 
 # Install netcat for the healthcheck
 RUN apk update && apk add --no-cache netcat-openbsd
