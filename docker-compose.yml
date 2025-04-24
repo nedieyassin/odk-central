@@ -20,6 +20,7 @@ services:
       - /var/lib/postgresql/data
       - postgres14:/var/lib/postgresql/14
       - ./files/postgres14/upgrade:/postgres14-upgrade
+      - ./files/allow-postgres14-upgrade
     environment:
       PGUSER: odk
       POSTGRES_INITDB_ARGS: -U odk
