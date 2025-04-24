@@ -11,7 +11,7 @@ COPY ./ ./
 
 
 ARG SKIP_FRONTEND_BUILD
-# RUN files/prebuild/build-frontend.sh
+RUN files/prebuild/build-frontend.sh
 
 
 
@@ -35,7 +35,7 @@ RUN chmod +x /scripts/setup-odk.sh
 COPY files/nginx/redirector.conf /usr/share/odk/nginx/
 COPY files/nginx/common-headers.conf /usr/share/odk/nginx/
 
-# COPY --from=intermediate client/dist/ /usr/share/nginx/html
+COPY --from=intermediate client/dist/ /usr/share/nginx/html
 # COPY --from=intermediate /tmp/version.txt /usr/share/nginx/html
 
 RUN printf 'versions:\n%s (%s)\n%s client (%s)\n%s server (%s)\n' \
