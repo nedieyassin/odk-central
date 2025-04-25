@@ -8,6 +8,8 @@ envsubst '$DOMAIN $BASE_URL $SYSADMIN_EMAIL $ENKETO_API_KEY $DB_HOST $DB_USER $D
     < /usr/share/odk/config.json.template \
     > /usr/odk/config/local.json
 
+cat /usr/odk/config/local.json
+
 SENTRY_RELEASE="$(cat sentry-versions/server)"
 export SENTRY_RELEASE
 # shellcheck disable=SC2089
